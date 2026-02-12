@@ -157,25 +157,39 @@ export default function App() {
 
       <div className="relative z-10">
         <header className="sticky top-0 z-[100] w-full bg-black/40 backdrop-blur-md border-b border-white/5">
-          <div className="flex justify-between items-center max-w-6xl mx-auto w-full px-4 py-4 md:py-6">
-            <div className="flex items-center gap-3 font-bold tracking-wider">
-              <a href="https://www.welovo.nl/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <img src="/images/hartje.png" alt="Logo Icon" className="h-7 md:h-9 w-auto object-contain" />
-                <span className="text-base md:text-lg leading-none">WELOVO</span>
-              </a>
-              <span className="text-zinc-600 text-xl opacity-40">×</span>
-              <a href="https://greentimer.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                <img src="/images/greentimer logo.png" alt="Greentimer" className="h-6 md:h-8 w-auto object-contain" />
-              </a>
-            </div>
-            <button 
-              onClick={() => document.getElementById('register').scrollIntoView({ behavior: 'smooth' })}
-              className="px-5 py-2 rounded-full text-[10px] md:text-xs font-bold bg-white/10 hover:bg-white/20 transition-colors uppercase tracking-widest"
-            >
-              MELD AAN
-            </button>
-          </div>
-        </header>
+  <div className="flex justify-between items-center max-w-6xl mx-auto w-full px-4 py-4 md:py-6">
+    <div className="flex items-center gap-3 font-bold tracking-wider">
+      {/* WE LOVO LINK */}
+      <a href="https://www.welovo.nl/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <img src="/images/hartje.png" alt="Logo Icon" className="h-7 md:h-9 w-auto object-contain" />
+        <span className="text-base md:text-lg leading-none">WELOVO</span>
+      </a>
+      
+      <span className="text-zinc-600 text-xl opacity-40">×</span>
+      
+      {/* GREENTIMER LINK */}
+      <a href="https://greentimer.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+        <img src="/images/greentimer logo.png" alt="Greentimer" className="h-6 md:h-8 w-auto object-contain" />
+      </a>
+
+      {/* VIP PROJECT LABEL - Alleen zichtbaar voor box-groep op desktop/tablet */}
+      {isVip && (
+        <div className="hidden md:flex items-center ml-4 pl-4 border-l border-white/10">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 font-medium">
+            The Final Spark
+          </span>
+        </div>
+      )}
+    </div>
+
+    <button 
+      onClick={() => document.getElementById('register').scrollIntoView({ behavior: 'smooth' })}
+      className="px-5 py-2 rounded-full text-[10px] md:text-xs font-bold bg-white/10 hover:bg-white/20 transition-colors uppercase tracking-widest"
+    >
+      MELD AAN
+    </button>
+  </div>
+</header>
       
         <section className="relative min-h-[90vh] flex flex-col px-4 pt-12 overflow-hidden">
           <div className="flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto z-10 px-4">
@@ -227,8 +241,8 @@ export default function App() {
               </div>
               <h2 className="text-2xl md:text-4xl font-bold mb-6">Een Unieke Showroom Introductie</h2>
               <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-center">
-                WeLovo verwelkomt de innovatie van <strong className="text-white font-bold">Greentimer</strong>. 
-                Tijdens de <strong className="text-white font-bold">Demo Dagen</strong> slaan we de handen ineen om u 
+                <strong className="text-white font-bold">WeLovo</strong> verwelkomt de innovatie van <strong className="text-white font-bold">Greentimer</strong>. 
+                Tijdens de <strong className="text-white font-bold">WeLovo x Greentimer Demo Dagen</strong> slaan we de handen ineen om u 
                 exclusief kennis te laten maken met de <strong className="text-white font-bold">omgebouwde elektrische XC90</strong>. 
                 Ontdek het <strong className="text-white font-bold">vakmanschap</strong> van dichtbij en bespreek met de 
                 <strong className="text-white font-bold"> experts</strong> wat deze techniek voor uw Volvo kan betekenen.
@@ -359,7 +373,7 @@ export default function App() {
 
             <div className="mt-12 pt-10 border-t border-white/5 text-center">
               <p className="text-zinc-500 text-sm mb-4">Directe vraag over de techniek?</p>
-              <a href={`https://wa.me/31612345678?text=${encodeURIComponent(waMessage)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 hover:bg-[#25D366]/20 transition-all group">
+              <a href={`https://wa.me/31647234285?text=${encodeURIComponent(waMessage)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 hover:bg-[#25D366]/20 transition-all group">
                 <MessageCircle className="w-5 h-5 fill-[#25D366]" />
                 <span className="font-bold">App met Steef (Founder Greentimer)</span>
               </a>
