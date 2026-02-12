@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
 import { Zap, Battery, Leaf, Calendar, Check, MessageCircle, Gauge, Shield, ArrowRight, ChevronDown, Award, Wallet, MapPin, Coffee } from 'lucide-react';
 
@@ -7,6 +7,48 @@ import { Zap, Battery, Leaf, Calendar, Check, MessageCircle, Gauge, Shield, Arro
 // CONFIGURATION
 // ============================================
 const ACCENT_COLOR = "#FF5F00"; // High Voltage Orange
+
+// ============================================
+// NEW COMPONENT: FAQItem
+// ============================================
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-white/5">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-6 flex justify-between items-center text-left focus:outline-none group"
+      >
+        <span className="text-lg md:text-xl font-medium text-zinc-200 group-hover:text-white transition-colors">
+          {question}
+        </span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="text-zinc-500"
+        >
+          <ChevronDown className="w-6 h-6" />
+        </motion.div>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="pb-8 text-zinc-400 leading-relaxed text-base md:text-lg max-w-2xl">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 // ============================================
 // ASSETS
@@ -141,7 +183,7 @@ export default function App() {
               {isVip ? (
                 <>
                   <h1 className="text-4xl md:text-7xl font-bold leading-[0.95] tracking-tighter mb-6 uppercase">
-                    DE VONK WAS HET BEGIN.<br /><span style={{ color: ACCENT_COLOR }}>NU DE KRACHT.</span>
+                    TIJDLOOS DESIGN.<br /><span style={{ color: ACCENT_COLOR }}>NIEUWE ENERGIE.</span>
                   </h1>
                   <p className="text-zinc-400 text-lg md:text-2xl font-light max-w-2xl mx-auto">Behoud het karakter. Kies voor de techniek van morgen.</p>
                 </>
@@ -204,8 +246,13 @@ export default function App() {
               <motion.div className="w-full bg-gradient-to-b from-orange-500 via-orange-500 to-transparent" style={{ height: wireHeight, boxShadow: `0 0 15px ${ACCENT_COLOR}` }} />
             </div>
             <div className="relative z-10">
-              <WireBenefit icon={Battery} title="82kWh of 55kwh Batterijpakket" description="82kWh of 55kWh Batterijpakket. Slim geïntegreerd in het chassis, waardoor de iconische 7-zits configuratie en alle bagageruimte volledig behouden blijven." index={0} />
-              <WireBenefit icon={Zap} title="Laden terwijl u luncht." description="Snelladen tijdens een koffiestop. Met 75kW CCS snelladen bent u in 30 minuten weer klaar voor de volgende 250km." index={1} />
+              <WireBenefit 
+  icon={Battery} 
+  title="82kWh of 55kwh Batterijpakket" 
+  description={<>Keuze uit een 82kWh of 55kWh batterijpakket met een <strong>actieradius tot 450 km (WLTP).</strong> Slim geïntegreerd in het chassis, waardoor de iconische interieurruimte en flexibiliteit volledig behouden blijven.</>} 
+  index={0} 
+/>
+              <WireBenefit icon={Zap} title="Laden terwijl u luncht." description="Snelladen tijdens de lunch of een koffiestop. Met 75kW CCS snelladen laadt u in circa 40 minuten weer bij tot 80% - goed voor de volgende 250 kilometer zorgeloos rijden." index={1} />
               <WireBenefit icon={Wallet} title="Financieel Voordeel" description="Bespaar direct op brandstof en belasting door de overstap naar elektrisch. Benut extra fiscaal voordeel door inruil naar een volledig omgebouwde bijna youngtimer XC90 uit 2003." index={2} />
               <WireBenefit icon={Shield} title="1,5 Jaar Volledige Garantie" description="Zorgeloos rijden met volledige garantie op de motor, batterijen en software." index={3} />
               <WireBenefit icon={Leaf} title="Maximale Duurzaamheid" description="Het behouden van een bestaand voertuig is de groenste keuze. Bespaar de enorme CO2-footprint van een nieuw productieproces." index={4} />
@@ -233,11 +280,47 @@ export default function App() {
           </div>
         </section>
 
+        {/* ============ FAQ SECTION ============ */}
+        <section className="py-24 px-4 bg-black/20">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center italic tracking-tight uppercase">Veelgestelde Vragen</h2>
+            <div className="flex flex-col">
+              <FAQItem 
+  question="Hoe ver kom ik echt met een elektrische XC90?" 
+  answer={<>Met het 82kWh accupakket haalt de XC90 een actieradius van <strong>450 km (WLTP)</strong>. In de praktijk komt dit neer op <strong>ruim 350 km</strong> puur elektrisch rijden. Dankzij de CCS-snellaadtechniek is de accu bovendien in <strong>45 minuten weer voor 80% vol</strong>, ideaal voor langere ritten of vakanties.</>}
+/>
+<FAQItem 
+  question="Wat zijn de grootste besparingen na de ombouw?" 
+  answer={<>De grootste winst zit in het dagelijks gebruik. Gemiddeld bespaart u <strong>ruim €280 per maand</strong> aan brandstofkosten (bij 15.000 km/jaar). Daarnaast dalen de onderhoudskosten met <strong>zo'n 60%</strong>; een elektromotor heeft immers nauwelijks bewegende delen en behoeft geen dure beurten voor filters, olie of distributieriemen.</>}
+/>
+<FAQItem 
+  question="Wat kost een volledige transformatie?" 
+  answer={<>Een complete ombouw begint bij <strong>€30.000 (ex. BTW)</strong> voor het 55kWh pakket. Voor het grotere 82kWh pakket (450 km range) ligt de investering rond de <strong>€35.000</strong>.</>}
+/>
+<FAQItem 
+  question="Welke Volvo XC90 modellen zijn geschikt voor ombouw?" 
+  answer={<>De huidige ombouwset is specifiek ontwikkeld voor de <strong>eerste generatie XC90 (modeljaar 2002 t/m 2014)</strong>. Zowel de 5- als de '7-zitplaats' versies kunnen worden omgebouwd naar een volledig elektrische aandrijving.</>}
+/>
+<FAQItem 
+  question="Wat is de 'Electric Youngtimer' optie precies?" 
+  answer={<>Voor ondernemers die willen blijven profiteren van de <strong>Youngtimer-regeling</strong>, is er de mogelijkheid om uw huidige XC90 in te ruilen op een reeds omgebouwd bijna youngtimer 2003-model. Zo rijdt u <strong>emissievrij</strong> met de maximale fiscale voordelen.</>}
+/>
+<FAQItem 
+  question="Is een bestaande auto ombouwen echt duurzamer dan een nieuwe EV?" 
+  answer={<>Absoluut. De productie van een nieuwe elektrische SUV kost gemiddeld <strong>20 ton CO2</strong>. Door uw huidige XC90 te behouden en te elektrificeren, bespaart u die enorme uitstoot én krijgt u <strong>onbeperkt toegang tot alle toekomstige milieuzones</strong>. Het is de meest circulaire manier van autorijden.</>}
+/>
+            </div>
+          </div>
+        </section>
+
         <section id="register" className="py-24 px-4">
           <div className="max-w-xl mx-auto bg-black/90 backdrop-blur-md rounded-[2.5rem] border border-white/10 p-8 md:p-12 relative overflow-hidden shadow-2xl">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight italic">STAP ACHTER HET STUUR</h2>
-              <p className="text-zinc-400">Persoonlijk advies en een proefrit in Beverwijk. <a href="https://www.google.com/maps/place/Welovo/@52.4785188,4.6623645,17z/data=!3m1!4b1!4m6!3m5!1s0x47c5e5e035ba107d:0x83b72df7db37cc0b!8m2!3d52.4785156!4d4.6649394!16s%2Fg%2F1td5_x_x?coh=277534&entry=tts&g_ep=EgoyMDI2MDIwNC4wIPu8ASoKLDEwMDc5MjA3MUgBUAM%3D&skid=a1a900fb-2539-4291-b0fa-0873013fd209" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-white transition-colors">WeLovo Beverwijk <MapPin className="w-3.5 h-3.5" /></a></p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight italic uppercase">STAP ACHTER HET STUUR</h2>
+              <div className="space-y-2">
+                <p className="text-zinc-400">Persoonlijk advies en een proefrit in Beverwijk. <a href="https://www.google.com/maps/place/Welovo/@52.4785188,4.6623645,17z/data=!3m1!4b1!4m6!3m5!1s0x47c5e5e035ba107d:0x83b72df7db37cc0b!8m2!3d52.4785156!4d4.6649394!16s%2Fg%2F1td5_x_x?coh=277534&entry=tts&g_ep=EgoyMDI2MDIwNC4wIPu8ASoKLDEwMDc5MjA3MUgBUAM%3D&skid=a1a900fb-2539-4291-b0fa-0873013fd209" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-white transition-colors">WeLovo Beverwijk <MapPin className="w-3.5 h-3.5" /></a></p>
+                <p className="text-zinc-400 font-medium">De proefrit en het advies zijn volledig kosteloos en vrijblijvend.</p>
+              </div>
             </div>
 
             {state.succeeded ? (
