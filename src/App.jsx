@@ -242,7 +242,7 @@ export default function App() {
               <h2 className="text-2xl md:text-4xl font-bold mb-6">Een Unieke Showroom Introductie</h2>
               <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-center">
                 <strong className="text-white font-bold">WeLovo</strong> verwelkomt de innovatie van <strong className="text-white font-bold">Greentimer</strong>. 
-                Tijdens de <strong className="text-white font-bold">WeLovo x Greentimer Demo Dagen</strong> slaan we de handen ineen om u 
+                Tijdens de <strong className="text-white font-bold">WeLovo x Greentimer Demo Dagen</strong> slaan we the handen ineen om u 
                 exclusief kennis te laten maken met de <strong className="text-white font-bold">omgebouwde elektrische XC90</strong>. 
                 Ontdek het <strong className="text-white font-bold">vakmanschap</strong> van dichtbij en bespreek met de 
                 <strong className="text-white font-bold"> experts</strong> wat deze techniek voor uw Volvo kan betekenen.
@@ -301,7 +301,7 @@ export default function App() {
             <div className="flex flex-col">
               <FAQItem 
   question="Hoe ver kom ik echt met een elektrische XC90?" 
-  answer={<>Met het 82kWh accupakket haalt de XC90 een actieradius van <strong>450 km (WLTP)</strong>. In de praktijk komt dit neer op <strong>ruim 350 km</strong> puur elektrisch rijden. Dankzij de CCS-snellaadtechniek is de accu bovendien in <strong>45 minuten weer voor 80% vol</strong>, ideaal voor langere ritten of vakanties.</>}
+  answer={<>Met het 82kWh accupakket haalt de XC90 een actieradius van <strong>450 km (WLTP)</strong>. In de praktijk komt dit neer op <strong>ruim 350 km</strong> puur elektrisch rijden. Dankzij de CCS-snellaadtechniek is de accu bovendien in <strong>40 minuten weer voor 80% vol</strong>, ideaal voor langere ritten of vakanties.</>}
 />
 <FAQItem 
   question="Wat zijn de grootste besparingen na de ombouw?" 
@@ -317,7 +317,7 @@ export default function App() {
 />
 <FAQItem 
   question="Wat is de 'Electric Youngtimer' optie precies?" 
-  answer={<>Voor ondernemers die willen blijven profiteren van de <strong>Youngtimer-regeling</strong>, is er de mogelijkheid om uw huidige XC90 in te ruilen op een reeds omgebouwd bijna youngtimer 2003-model. Zo rijdt u <strong>emissievrij</strong> met de maximale fiscale voordelen.</>}
+  answer={<>Voor ondernemers die willen blijven profiteren van de <strong>Youngtimer-regeling</strong>, is er de mogelijkheid om uw huidige XC90 in te ruilen voor een reeds omgebouwd bijna youngtimer 2003-model. Zo rijdt u <strong>emissievrij</strong> met de maximale fiscale voordelen.</>}
 />
 <FAQItem 
   question="Is een bestaande auto ombouwen echt duurzamer dan een nieuwe EV?" 
@@ -341,19 +341,19 @@ export default function App() {
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-10">
                 <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6"><Check className="w-10 h-10" strokeWidth={3} /></div>
                 <h3 className="text-3xl font-bold text-white mb-2 italic">Bevestigd!</h3>
-                <p className="text-zinc-400">We nemen binnen 24 uur contact op om het exacte tijdstip voor {demoDay} maart af te spreken.</p>
+                <p className="text-zinc-400">We nemen binnen 24 uur contact op om het exacte tijdstip voor {demoDay} af te spreken.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Hidden Fields voor context in de mail */}
                 <input type="hidden" name="Campagne_Type" value={isVip ? "VIP (Box ontvangen)" : "Regulier (Brief ontvangen)"} />
-                <input type="hidden" name="Gekozen_Dag" value={demoDay ? (demoDay === '12' ? '12 Maart' : '13 Maart') : 'Nog niet gekozen'} />
+                <input type="hidden" name="Gekozen_Dag" value={demoDay || 'Nog niet gekozen'} />
                 
                 <div className="flex gap-4 mb-6">
-                  {['12', '13'].map((day) => (
+                  {['28 Maart', '11 April'].map((day) => (
                     <button key={day} type="button" onClick={() => setDemoDay(day)} className={`flex-1 p-5 rounded-2xl border-2 transition-all ${demoDay === day ? 'bg-orange-500/10 border-orange-500 text-orange-500' : 'bg-zinc-900 border-transparent hover:border-white/10'}`}>
-                      <div className="text-2xl font-black">{day}</div>
-                      <div className="text-[10px] uppercase font-bold tracking-widest opacity-60">{day === '12' ? 'Maart (Wo)' : 'Maart (Do)'}</div>
+                      <div className="text-2xl font-black">{day.split(' ')[0]}</div>
+                      <div className="text-[10px] uppercase font-bold tracking-widest opacity-60">{day.split(' ')[1]} (Za)</div>
                     </button>
                   ))}
                 </div>
