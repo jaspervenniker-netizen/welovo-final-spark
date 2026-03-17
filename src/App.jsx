@@ -267,7 +267,7 @@ export default function App() {
   index={0} 
 />
               <WireBenefit icon={Zap} title="Laden terwijl u luncht." description="Snelladen tijdens de lunch of een koffiestop. Met 75kW CCS snelladen laadt u in circa 40 minuten weer bij tot 80% - goed voor de volgende 250 kilometer zorgeloos rijden." index={1} />
-              <WireBenefit icon={Wallet} title="Financieel Voordeel" description="Bespaar direct op brandstof en belasting door de overstap naar elektrisch. Benut extra fiscaal voordeel door inruil naar een volledig omgebouwde bijna youngtimer XC90 uit 2003." index={2} />
+              <WireBenefit icon={Wallet} title="Financieel Voordeel" description="Bespaar direct op brandstof, onderhoud en wegenbelasting door de opstap naar elektrisch. Benut extra fiscaal voordeel door gebruikt te maken van de Youngtimer regeling, de elektrische bijtellingskorting en betaal geen pseudo eindheffing." index={2} />
               <WireBenefit icon={Shield} title="1,5 Jaar Volledige Garantie" description="Zorgeloos rijden met volledige garantie op de motor, batterijen en software." index={3} />
               <WireBenefit icon={Leaf} title="Maximale Duurzaamheid" description="Het behouden van een bestaand voertuig is de groenste keuze. Bespaar de enorme CO2-footprint van een nieuw productieproces." index={4} />
               <WireBenefit icon={Gauge} title="Direct Koppel" description="Ervaar het plezier van elektrisch rijden. Sneller, stiller en krachtiger dan de originele brandstofmotor." index={5} />
@@ -309,15 +309,29 @@ export default function App() {
 />
 <FAQItem 
   question="Wat kost een volledige transformatie?" 
-  answer={<>Een complete ombouw begint bij <strong>€30.000 (ex. BTW)</strong> voor het 55kWh pakket. Voor het grotere 82kWh pakket (450 km range) ligt de investering rond de <strong>€35.000</strong>.</>}
+  answer={<>Een complete ombouw begint bij <strong>€30.000 (ex. BTW)</strong> voor het 55kWh pakket. Voor het grotere 82kWh pakket (450 km range) ligt de investering rond de <strong>€35.000 (ex. BTW)</strong>.</>}
 />
 <FAQItem 
   question="Welke Volvo XC90 modellen zijn geschikt voor ombouw?" 
   answer={<>De huidige ombouwset is specifiek ontwikkeld voor de <strong>eerste generatie XC90 (modeljaar 2002 t/m 2014)</strong>. Zowel de 5- als de '7-zitplaats' versies kunnen worden omgebouwd naar een volledig elektrische aandrijving.</>}
 />
 <FAQItem 
-  question="Wat is de 'Electric Youngtimer' optie precies?" 
-  answer={<>Voor ondernemers die willen blijven profiteren van de <strong>Youngtimer-regeling</strong>, is er de mogelijkheid om uw huidige XC90 in te ruilen voor een reeds omgebouwd bijna youngtimer 2003-model. Zo rijdt u <strong>emissievrij</strong> met de maximale fiscale voordelen.</>}
+  question="Wat is de status van de Youngtimer regeling precies?" 
+  answer={
+    <>
+      De eerder gecommuniceerde versobering van 15 naar 25 jaar lijkt van tafel. 
+      De indiener van de versobering gaat een motie indienen om deze (met wat kleine aanpassingen) terug te draaien. 
+      Hier is ruim voldoende steun voor.{" "}
+      <a 
+        href="https://www.autoweek.nl/autonieuws/artikel/hoop-voor-youngtimer-bedenker-afschaffen-youngtimerregeling-wil-reparatie/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-blue-600 underline hover:text-blue-800"
+      >
+        Lees hier meer op AutoWeek.nl
+      </a>
+    </>
+  }
 />
 <FAQItem 
   question="Is een bestaande auto ombouwen echt duurzamer dan een nieuwe EV?" 
