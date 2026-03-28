@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
-import { Zap, Battery, Leaf, Calendar, Check, MessageCircle, Gauge, Shield, ArrowRight, ChevronDown, Award, Wallet, MapPin, Coffee } from 'lucide-react';
+import { Zap, Battery, Leaf, Calendar, Check, MessageCircle, Gauge, Shield, ArrowRight, ChevronDown, Award, Wallet, MapPin } from 'lucide-react';
 
 // ============================================
 // CONFIGURATION
@@ -123,7 +123,8 @@ export default function App() {
   const wireHeight = useTransform(scrollYProgress, [0.1, 0.8], ["0%", "100%"]);
   const overlayColor = useTransform(scrollYProgress, [0, 0.6], ["rgba(5, 5, 5, 0.98)", "rgba(8, 28, 8, 0.85)"]);
   
-  const [demoDay, setDemoDay] = useState(null); 
+  // Set default selection to the next available date (April 11)
+  const [demoDay, setDemoDay] = useState('11 April'); 
   const [isVip, setIsVip] = useState(false);
 
   useEffect(() => {
@@ -157,58 +158,47 @@ export default function App() {
 
       <div className="relative z-10">
         <header className="sticky top-0 z-[100] w-full bg-black/40 backdrop-blur-md border-b border-white/5">
-  <div className="flex justify-between items-center max-w-6xl mx-auto w-full px-4 py-4 md:py-6">
-    <div className="flex items-center gap-3 font-bold tracking-wider">
-      {/* WE LOVO LINK */}
-      <a href="https://www.welovo.nl/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <img src="/images/hartje.png" alt="Logo Icon" className="h-7 md:h-9 w-auto object-contain" />
-        <span className="text-base md:text-lg leading-none">WELOVO</span>
-      </a>
-      
-      <span className="text-zinc-600 text-xl opacity-40">×</span>
-      
-      {/* GREENTIMER LINK */}
-      <a href="https://greentimer.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-        <img src="/images/greentimer logo.png" alt="Greentimer" className="h-6 md:h-8 w-auto object-contain" />
-      </a>
+          <div className="flex justify-between items-center max-w-6xl mx-auto w-full px-4 py-4 md:py-6">
+            <div className="flex items-center gap-3 font-bold tracking-wider">
+              {/* WE LOVO LINK */}
+              <a href="https://www.welovo.nl/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <img src="/images/hartje.png" alt="Logo Icon" className="h-7 md:h-9 w-auto object-contain" />
+                <span className="text-base md:text-lg leading-none">WELOVO</span>
+              </a>
+              
+              <span className="text-zinc-600 text-xl opacity-40">×</span>
+              
+              {/* GREENTIMER LINK */}
+              <a href="https://greentimer.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <img src="/images/greentimer logo.png" alt="Greentimer" className="h-6 md:h-8 w-auto object-contain" />
+              </a>
 
-      {/* VIP PROJECT LABEL - Alleen zichtbaar voor box-groep op desktop/tablet */}
-      {isVip && (
-        <div className="hidden md:flex items-center ml-4 pl-4 border-l border-white/10">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 font-medium">
-            The Final Spark
-          </span>
-        </div>
-      )}
-    </div>
+              {/* VIP PROJECT LABEL */}
+              {isVip && (
+                <div className="hidden md:flex items-center ml-4 pl-4 border-l border-white/10">
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 font-medium">
+                    The Final Spark
+                  </span>
+                </div>
+              )}
+            </div>
 
-    <button 
-      onClick={() => document.getElementById('register').scrollIntoView({ behavior: 'smooth' })}
-      className="px-5 py-2 rounded-full text-[10px] md:text-xs font-bold bg-white/10 hover:bg-white/20 transition-colors uppercase tracking-widest"
-    >
-      MELD AAN
-    </button>
-  </div>
-</header>
+            <button 
+              onClick={() => document.getElementById('register').scrollIntoView({ behavior: 'smooth' })}
+              className="px-5 py-2 rounded-full text-[10px] md:text-xs font-bold bg-white/10 hover:bg-white/20 transition-colors uppercase tracking-widest"
+            >
+              MELD AAN
+            </button>
+          </div>
+        </header>
       
         <section className="relative min-h-[90vh] flex flex-col px-4 pt-12 overflow-hidden">
           <div className="flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto z-10 px-4">
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-              {isVip ? (
-                <>
-                  <h1 className="text-4xl md:text-7xl font-bold leading-[0.95] tracking-tighter mb-6 uppercase">
+                <h1 className="text-4xl md:text-7xl font-bold leading-[0.95] tracking-tighter mb-6 uppercase">
                     TIJDLOOS DESIGN.<br /><span style={{ color: ACCENT_COLOR }}>NIEUWE ENERGIE.</span>
-                  </h1>
-                  <p className="text-zinc-400 text-lg md:text-2xl font-light max-w-2xl mx-auto">Behoud het karakter. Kies voor de techniek van morgen.</p>
-                </>
-              ) : (
-                <>
-                  <h1 className="text-5xl md:text-8xl font-bold leading-[0.9] tracking-tighter mb-6">
-                    TIJDLOOS DESIGN.<br /><span style={{ color: ACCENT_COLOR }}>NIEUWE ENERGIE.</span>
-                  </h1>
-                  <p className="text-zinc-400 text-lg md:text-2xl font-light max-w-2xl mx-auto">Behoud het karakter. Kies voor de techniek van morgen.</p>
-                </>
-              )}
+                </h1>
+                <p className="text-zinc-400 text-lg md:text-2xl font-light max-w-2xl mx-auto">Behoud het karakter. Kies voor de techniek van morgen.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }} className="w-full max-w-[550px] mb-6 pointer-events-none">
               <XC90Orange />
@@ -242,7 +232,7 @@ export default function App() {
               <h2 className="text-2xl md:text-4xl font-bold mb-6">Een Unieke Showroom Introductie</h2>
               <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-center">
                 <strong className="text-white font-bold">WeLovo</strong> verwelkomt de innovatie van <strong className="text-white font-bold">Greentimer</strong>. 
-                Tijdens de <strong className="text-white font-bold">WeLovo x Greentimer Demo Dagen</strong> slaan we the handen ineen om u 
+                Tijdens de <strong className="text-white font-bold">WeLovo x Greentimer Demo Dagen</strong> slaan we de handen ineen om u 
                 exclusief kennis te laten maken met de <strong className="text-white font-bold">omgebouwde elektrische XC90</strong>. 
                 Ontdek het <strong className="text-white font-bold">vakmanschap</strong> van dichtbij en bespreek met de 
                 <strong className="text-white font-bold"> experts</strong> wat deze techniek voor uw Volvo kan betekenen.
@@ -261,11 +251,11 @@ export default function App() {
             </div>
             <div className="relative z-10">
               <WireBenefit 
-  icon={Battery} 
-  title="82kWh of 55kwh Batterijpakket" 
-  description={<>Keuze uit een 82kWh of 55kWh batterijpakket met een <strong>actieradius tot 450 km (WLTP).</strong> Slim geïntegreerd in het chassis, waardoor de iconische interieurruimte en flexibiliteit volledig behouden blijven.</>} 
-  index={0} 
-/>
+                icon={Battery} 
+                title="82kWh of 55kwh Batterijpakket" 
+                description={<>Keuze uit een 82kWh of 55kWh batterijpakket met een <strong>actieradius tot 450 km (WLTP).</strong> Slim geïntegreerd in het chassis, waardoor de iconische interieurruimte en flexibiliteit volledig behouden blijven.</>} 
+                index={0} 
+              />
               <WireBenefit icon={Zap} title="Laden terwijl u luncht." description="Snelladen tijdens de lunch of een koffiestop. Met 75kW CCS snelladen laadt u in circa 40 minuten weer bij tot 80% - goed voor de volgende 250 kilometer zorgeloos rijden." index={1} />
               <WireBenefit icon={Wallet} title="Financieel Voordeel" description="Bespaar direct op brandstof, onderhoud en wegenbelasting door de opstap naar elektrisch. Benut extra fiscaal voordeel door gebruikt te maken van de Youngtimer regeling, de elektrische bijtellingskorting en betaal geen pseudo eindheffing." index={2} />
               <WireBenefit icon={Shield} title="1,5 Jaar Volledige Garantie" description="Zorgeloos rijden met volledige garantie op de motor, batterijen en software." index={3} />
@@ -300,43 +290,43 @@ export default function App() {
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center italic tracking-tight uppercase">Veelgestelde Vragen</h2>
             <div className="flex flex-col">
               <FAQItem 
-  question="Hoe ver kom ik echt met een elektrische XC90?" 
-  answer={<>Met het 82kWh accupakket haalt de XC90 een actieradius van <strong>450 km (WLTP)</strong>. In de praktijk komt dit neer op <strong>ruim 350 km</strong> puur elektrisch rijden. Dankzij de CCS-snellaadtechniek is de accu bovendien in <strong>40 minuten weer voor 80% vol</strong>, ideaal voor langere ritten of vakanties.</>}
-/>
-<FAQItem 
-  question="Wat zijn de grootste besparingen na de ombouw?" 
-  answer={<>De grootste winst zit in het dagelijks gebruik. Gemiddeld bespaart u <strong>ruim €280 per maand</strong> aan brandstofkosten (bij 15.000 km/jaar). Daarnaast dalen de onderhoudskosten met <strong>zo'n 60%</strong>; een elektromotor heeft immers nauwelijks bewegende delen en behoeft geen dure beurten voor filters, olie of distributieriemen.</>}
-/>
-<FAQItem 
-  question="Wat kost een volledige transformatie?" 
-  answer={<>Een complete ombouw begint bij <strong>€30.000 (ex. BTW)</strong> voor het 55kWh pakket. Voor het grotere 82kWh pakket (450 km range) ligt de investering rond de <strong>€35.000 (ex. BTW)</strong>.</>}
-/>
-<FAQItem 
-  question="Welke Volvo XC90 modellen zijn geschikt voor ombouw?" 
-  answer={<>De huidige ombouwset is specifiek ontwikkeld voor de <strong>eerste generatie XC90 (modeljaar 2002 t/m 2014)</strong>. Zowel de 5- als de '7-zitplaats' versies kunnen worden omgebouwd naar een volledig elektrische aandrijving.</>}
-/>
-<FAQItem 
-  question="Wat is de status van de Youngtimer regeling precies?" 
-  answer={
-    <>
-      De eerder gecommuniceerde versobering van 15 naar 25 jaar lijkt van tafel. 
-      De indiener van de versobering gaat een motie indienen om deze (met wat kleine aanpassingen) terug te draaien. 
-      Hier is ruim voldoende steun voor.{" "}
-      <a 
-        href="https://www.autoweek.nl/autonieuws/artikel/hoop-voor-youngtimer-bedenker-afschaffen-youngtimerregeling-wil-reparatie/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-blue-600 underline hover:text-blue-800"
-      >
-        Lees hier meer op AutoWeek.nl
-      </a>
-    </>
-  }
-/>
-<FAQItem 
-  question="Is een bestaande auto ombouwen echt duurzamer dan een nieuwe EV?" 
-  answer={<>Absoluut. De productie van een nieuwe elektrische SUV kost gemiddeld <strong>20 ton CO2</strong>. Door uw huidige XC90 te behouden en te elektrificeren, bespaart u die enorme uitstoot én krijgt u <strong>onbeperkt toegang tot alle toekomstige milieuzones</strong>. Het is de meest circulaire manier van autorijden.</>}
-/>
+                question="Hoe ver kom ik echt met een elektrische XC90?" 
+                answer={<>Met het 82kWh accupakket haalt de XC90 een actieradius van <strong>450 km (WLTP)</strong>. In de praktijk komt dit neer op <strong>ruim 350 km</strong> puur elektrisch rijden. Dankzij de CCS-snellaadtechniek is de accu bovendien in <strong>40 minuten weer voor 80% vol</strong>, ideaal voor langere ritten of vakanties.</>}
+              />
+              <FAQItem 
+                question="Wat zijn de grootste besparingen na de ombouw?" 
+                answer={<>De grootste winst zit in het dagelijks gebruik. Gemiddeld bespaart u <strong>ruim €280 per maand</strong> aan brandstofkosten (bij 15.000 km/jaar). Daarnaast dalen de onderhoudskosten met <strong>zo'n 60%</strong>; een elektromotor heeft immers nauwelijks bewegende delen en behoeft geen dure beurten voor filters, olie of distributieriemen.</>}
+              />
+              <FAQItem 
+                question="Wat kost een volledige transformatie?" 
+                answer={<>Een complete ombouw begint bij <strong>€30.000 (ex. BTW)</strong> voor het 55kWh pakket. Voor het grotere 82kWh pakket (450 km range) ligt de investering rond de <strong>€35.000 (ex. BTW)</strong>.</>}
+              />
+              <FAQItem 
+                question="Welke Volvo XC90 modellen zijn geschikt voor ombouw?" 
+                answer={<>De huidige ombouwset is specifiek ontwikkeld voor de <strong>eerste generatie XC90 (modeljaar 2002 t/m 2014)</strong>. Zowel de 5- als de '7-zitplaats' versies kunnen worden omgebouwd naar een volledig elektrische aandrijving.</>}
+              />
+              <FAQItem 
+                question="Wat is de status van de Youngtimer regeling precies?" 
+                answer={
+                  <>
+                    De eerder gecommuniceerde versobering van 15 naar 25 jaar lijkt van tafel. 
+                    De indiener van de versobering gaat een motie indienen om deze terug te draaien. 
+                    Hier is ruim voldoende steun voor.{" "}
+                    <a 
+                      href="https://www.autoweek.nl/autonieuws/artikel/hoop-voor-youngtimer-bedenker-afschaffen-youngtimerregeling-wil-reparatie/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-blue-600 underline hover:text-blue-800"
+                    >
+                      Lees hier meer op AutoWeek.nl
+                    </a>
+                  </>
+                }
+              />
+              <FAQItem 
+                question="Is een bestaande auto ombouwen echt duurzamer dan een nieuwe EV?" 
+                answer={<>Absoluut. De productie van een nieuwe elektrische SUV kost gemiddeld <strong>20 ton CO2</strong>. Door uw huidige XC90 te behouden en te elektrificeren, bespaart u die enorme uitstoot én krijgt u <strong>onbeperkt toegang tot alle toekomstige milieuzones</strong>. Het is de meest circulaire manier van autorijden.</>}
+              />
             </div>
           </div>
         </section>
@@ -364,19 +354,51 @@ export default function App() {
                 <input type="hidden" name="Gekozen_Dag" value={demoDay || 'Nog niet gekozen'} />
                 
                 <div className="flex gap-4 mb-6">
-                  {['28 Maart', '11 April'].map((day) => (
-                    <button key={day} type="button" onClick={() => setDemoDay(day)} className={`flex-1 p-5 rounded-2xl border-2 transition-all ${demoDay === day ? 'bg-orange-500/10 border-orange-500 text-orange-500' : 'bg-zinc-900 border-transparent hover:border-white/10'}`}>
-                      <div className="text-2xl font-black">{day.split(' ')[0]}</div>
-                      <div className="text-[10px] uppercase font-bold tracking-widest opacity-60">{day.split(' ')[1]} (Za)</div>
-                    </button>
-                  ))}
+                  {[
+                    { date: '28 Maart', isPast: true }, 
+                    { date: '11 April', isPast: false }
+                  ].map(({ date, isPast }) => {
+                    const isSelected = demoDay === date;
+                    
+                    return (
+                      <button 
+                        key={date} 
+                        type="button" 
+                        disabled={isPast}
+                        onClick={() => !isPast && setDemoDay(date)} 
+                        className={`flex-1 p-5 rounded-2xl border-2 transition-all relative overflow-hidden
+                          ${isPast ? 'bg-zinc-900/50 border-white/5 cursor-not-allowed' : 
+                            isSelected ? 'bg-orange-500/10 border-orange-500 text-orange-500 shadow-[0_0_20px_rgba(255,95,0,0.1)]' : 
+                            'bg-zinc-900 border-transparent hover:border-white/10'}`}
+                      >
+                        {/* Red Stripe / Strike-through for past date */}
+                        {isPast && (
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                            <div className="w-[120%] h-[2px] bg-red-600/60 rotate-[-15deg] shadow-[0_0_8px_rgba(220,38,38,0.4)]" />
+                            <div className="absolute top-2 right-2 text-[8px] font-black text-red-500 uppercase tracking-tighter bg-black/40 px-1 rounded">
+                              Geweest
+                            </div>
+                          </div>
+                        )}
+
+                        <div className={`text-2xl font-black ${isPast ? 'opacity-30 grayscale' : 'opacity-100'}`}>
+                          {date.split(' ')[0]}
+                        </div>
+                        <div className={`text-[10px] uppercase font-bold tracking-widest ${isPast ? 'opacity-20 grayscale' : 'opacity-60'}`}>
+                          {date.split(' ')[1]} (Za)
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
+
                 <div className="space-y-3">
                   <input type="text" name="Naam" required placeholder="Uw Naam" className="w-full bg-zinc-900 border border-white/5 rounded-xl px-5 py-4 focus:border-orange-500 outline-none transition-colors" />
                   <input type="email" name="Email" required placeholder="E-mailadres" className="w-full bg-zinc-900 border border-white/5 rounded-xl px-5 py-4 focus:border-orange-500 outline-none transition-colors" />
                   <ValidationError prefix="Email" field="Email" errors={state.errors} className="text-red-500 text-xs" />
                   <input type="tel" name="Telefoon" required placeholder="Telefoonnummer" className="w-full bg-zinc-900 border border-white/5 rounded-xl px-5 py-4 focus:border-orange-500 outline-none transition-colors" />
                 </div>
+                
                 <motion.button type="submit" disabled={state.submitting} className="w-full py-5 rounded-2xl font-black text-black mt-6 flex items-center justify-center gap-3 text-lg uppercase tracking-tight" style={{ backgroundColor: ACCENT_COLOR }}>
                   {state.submitting ? 'Verwerken...' : 'IK BEN ERBIJ'}
                   {!state.submitting && <ArrowRight className="w-5 h-5" />}
